@@ -2,7 +2,7 @@
 import { FlipText } from "./components/FlipText";
 import PricingSection from "./components/Pricing";
 import InfiniteSlideText from "./components/InfiniteSlideText";
-
+import Footer from "./components/Footer";
 import { LucideBarChart, LucideBell, LucideCalendar, LucideCoins, LucideGroup, LucideTarget, LucideUsers } from "lucide-react";
 import Image from "next/image";
 export default function Home() {
@@ -39,7 +39,7 @@ export default function Home() {
             Whether you`&apos;`re saving for a rainy day, a dream vacation, or your child`&apos;`s education, Lejaa makes it easy. Set your goals, save at your own pace, and watch your savings grow—all from your mobile phone. No bank account needed. Your future starts with just a few taps
           </p>
           <div className="mt-8 flex space-x-3 w-2/3 h-16">
-            <div className="bg-gradient-to-r from-amber-300 to-amber-500 flex items-center justify-center rounded-full p-6 py-3 w-1/2 bg-amber-500 text-lg font-semibold">Sign Up</div>
+            <button href="/register" className="bg-gradient-to-r from-amber-300 to-amber-500 flex items-center justify-center rounded-full p-6 py-3 w-1/2 bg-amber-500 text-lg font-semibold"><p href="/register">Sign Up</p></button>
             <div className="flex items-center justify-center rounded-full p-6 w-1/2 bg-white text-lg text-black font-semibold">About Us</div>
           </div>
         </div>
@@ -183,7 +183,10 @@ export default function Home() {
       </section>
 
       <PricingSection />
+      <Footer />
 
     </main >
+
+    
   );
 }

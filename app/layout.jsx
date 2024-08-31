@@ -4,7 +4,7 @@ import "./globals.css";
 import Link from "next/link";
 import localFont from 'next/font/local'
 import Footer from "./components/Footer";
-
+import {AuthProvider} from './context/AuthContext'
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata = {
@@ -38,7 +38,7 @@ export default function RootLayout({
           <div className="bg-amber-500 rounded-lg w-32 h-12 flex justify-center items-center">Contact Us</div>
         </div>
         {children}
-        <Footer />
+        
       </body>
     </html>
   );

@@ -1,123 +1,84 @@
-"use client"
-import React, { useState, useEffect } from 'react';
-import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
+// pages/dashboard.js
+'use client';
 
-import {Card, CardHeader, CardContent} from '../../../components/ui/card'
+import React from 'react';
+import Link from 'next/link';
+import { usePathname } from 'next/navigation';
+import { FaPiggyBank, FaCreditCard, FaShieldAlt } from 'react-icons/fa';
+import Savings from '../../components/Savings'
+import Credit from '../../components/Credit';
+import Insurance from '../../components/Insurance';
 
-import {Input} from '../../../components/ui/input'
-
-import { Button } from '../../../components/ui/button';
 const Dashboard = () => {
-  const [communities, setCommunities] = useState([]);
-  const [savingsPools, setSavingsPools] = useState([]);
-  const [selectedCommunity, setSelectedCommunity] = useState(null);
-  const [selectedPool, setSelectedPool] = useState(null);
-
-  useEffect(() => {
-    // Fetch communities and savings pools data
-    // This is a placeholder and should be replaced with actual API calls
-    setCommunities([
-      { id: 1, name: 'Community A', balance: 5000 },
-      { id: 2, name: 'Community B', balance: 7500 },
-    ]);
-    setSavingsPools([
-      { id: 1, name: 'Pool X', balance: { USD: 1000, BTC: 0.5 }, goal: 5000, progress: 20 },
-      { id: 2, name: 'Pool Y', balance: { USD: 2000, ETH: 1 }, goal: 10000, progress: 40 },
-    ]);
-  }, []);
-
-  const handleCommunitySelect = (community) => {
-    setSelectedCommunity(community);
-  };
-
-  const handlePoolSelect = (pool) => {
-    setSelectedPool(pool);
-  };
+  const pathname = usePathname();
 
   return (
-    <div className="p-6 bg-gray-100 min-h-screen">
-      <h1 className="text-3xl font-bold mb-6">Dashboard</h1>
+    <div className="min-h-screen bg-gray-100 flex flex-col">
+      {/* Header */}
+      <header className="bg-white shadow">
+        <div className="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8 flex justify-between items-center">
+          <h1 className="text-3xl font-bold text-gray-900">Dashboard</h1>
+          <Link href="/logout">
+            <button className="px-4 py-2 bg-red-500 text-white rounded hover:bg-red-600">
+              Logout
+            </button>
+          </Link>
+        </div>
+      </header>
+
+      {/* Main Content */}
+      <div className="flex flex-1">
+        {/* Sidebar */}
+        <aside className="w-64 bg-white shadow-md">
+          <nav className="mt-10">
+            <Link href="/dashboard/savings"    className={`flex items-center px-4 py-2 text-gray-700 hover:bg-gray-200 ${
+                  pathname === '/dashboard/savings' ? 'bg-gray-200' : ''
+                }`}
+              >
+            
+             
+                <FaPiggyBank className="mr-3" />
+                Savings
+            
+            </Link>
+            <Link href="/dashboard/credit"      className={`flex items-center px-4 py-2 text-gray-700 hover:bg-gray-200 ${
+                  pathname === '/dashboard/credit' ? 'bg-gray-200' : ''
+                }`}>
+   
+           
+              
+                <FaCreditCard className="mr-3" />
+                Credit
       
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-        <Card>
-          <CardHeader>
-            <h2 className="text-2xl font-semibold">Community Insurance</h2>
-          </CardHeader>
-          <CardContent>
-            <div className="mb-4">
-              <h3 className="text-lg font-medium mb-2">Your Communities</h3>
-              {communities.map((community) => (
-                <Button
-                  key={community.id}
-                  onClick={() => handleCommunitySelect(community)}
-                  variant={selectedCommunity?.id === community.id ? 'default' : 'outline'}
-                  className="mr-2 mb-2"
-                >
-                  {community.name}
-                </Button>
-              ))}
-            </div>
-            {selectedCommunity && (
-              <div>
-                <h3 className="text-lg font-medium mb-2">{selectedCommunity.name} Details</h3>
-                <p>Balance: ${selectedCommunity.balance}</p>
-                <Button className="mt-4">Submit Claim</Button>
-              </div>
-            )}
-          </CardContent>
-        </Card>
+            </Link>
+            <Link href="/dashboard/insurance"  className={`flex items-center px-4 py-2 text-gray-700 hover:bg-gray-200 ${
+                  pathname === '/dashboard/insurance' ? 'bg-gray-200' : ''
+                }`}>
+    
+               
+      
+                <FaShieldAlt className="mr-3" />
+                Insurance
+         
+            </Link>
+          </nav>
+        </aside>
 
-        <Card>
-          <CardHeader>
-            <h2 className="text-2xl font-semibold">Savings Pools</h2>
-          </CardHeader>
-          <CardContent>
-            <div className="mb-4">
-              <h3 className="text-lg font-medium mb-2">Your Pools</h3>
-              {savingsPools.map((pool) => (
-                <Button
-                  key={pool.id}
-                  onClick={() => handlePoolSelect(pool)}
-                  variant={selectedPool?.id === pool.id ? 'default' : 'outline'}
-                  className="mr-2 mb-2"
-                >
-                  {pool.name}
-                </Button>
-              ))}
+        {/* Content Area */}
+        <main className="flex-1 p-6">
+          {/* Using dynamic routing for different sections */}
+          {pathname === '/dashboard/savings' && <Savings />}
+          {pathname === '/dashboard/credit' && <Credit />}
+          {pathname === '/dashboard/insurance' && <Insurance />}
+          {/* Default Content */}
+          {pathname === '/dashboard' && (
+            <div className="text-center mt-20">
+              <h2 className="text-2xl font-semibold">Welcome to Your Dashboard!</h2>
+              <p className="mt-4 text-gray-600">Select a section from the sidebar to get started.</p>
             </div>
-            {selectedPool && (
-              <div>
-                <h3 className="text-lg font-medium mb-2">{selectedPool.name} Details</h3>
-                <p>Goal: ${selectedPool.goal}</p>
-                <p>Progress: {selectedPool.progress}%</p>
-                <div className="mt-4">
-                  <Input type="number" placeholder="Amount" className="mb-2" />
-                  <Button className="mr-2">Deposit</Button>
-                  <Button variant="outline">Withdraw</Button>
-                </div>
-              </div>
-            )}
-          </CardContent>
-        </Card>
+          )}
+        </main>
       </div>
-
-      <Card className="mt-6">
-        <CardHeader>
-          <h2 className="text-2xl font-semibold">Activity Overview</h2>
-        </CardHeader>
-        <CardContent>
-          <ResponsiveContainer width="100%" height={300}>
-            <BarChart data={communities}>
-              <CartesianGrid strokeDasharray="3 3" />
-              <XAxis dataKey="name" />
-              <YAxis />
-              <Tooltip />
-              <Legend />
-              <Bar dataKey="balance" fill="#8884d8" />
-            </BarChart>
-          </ResponsiveContainer>
-        </CardContent>
-      </Card>
     </div>
   );
 };
