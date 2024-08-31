@@ -10,7 +10,7 @@ import Insurance from '../../components/Insurance';
 import Community from '../../components/CommunityCreation';
 import { db, auth } from '../../lib/firebase';
 import { collection, query, where, getDocs } from 'firebase/firestore';
-import { FaUsers } from 'react-icons/fa'
+import {FaUsers} from 'react-icons/fa'
 import { onAuthStateChanged } from 'firebase/auth';
 import { Bar, Pie, Line } from 'react-chartjs-2';
 import { Chart as ChartJS, CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend, ArcElement, PointElement, LineElement } from 'chart.js';
@@ -76,16 +76,8 @@ const Dashboard = () => {
 
   const savingsChartData = {
     labels: Object.keys(savingsByMonth).sort(),
-    backgroundColor: [
-      '#FFB300', // Amber color
-      '#FFB300', // Amber color
-      '#FFB300', // Amber color
-    ],
     datasets: [
       {
-        backgroundColor: [
-          '#FFB300', // Amber color
-        ],
         label: 'Savings ($)',
         data: Object.values(savingsByMonth),
         backgroundColor: 'rgba(75, 192, 192, 0.6)',
@@ -147,24 +139,24 @@ const Dashboard = () => {
         <aside className="w-64 bg-white shadow-md">
           <nav className="mt-10">
             <Link href="/dashboard/savings" className={`flex items-center px-4 py-2 text-gray-700 hover:bg-gray-200 ${pathname === '/dashboard/savings' ? 'bg-gray-200' : ''}`}>
-              <FaPiggyBank className="mr-3 w-6 h-6" />
+              <FaPiggyBank className="mr-3" />
               Savings
             </Link>
             <Link href="/dashboard/credit" className={`flex items-center px-4 py-2 text-gray-700 hover:bg-gray-200 ${pathname === '/dashboard/credit' ? 'bg-gray-200' : ''}`}>
-              <FaCreditCard className="mr-3 w-6 h-6" />
+              <FaCreditCard className="mr-3" />
               Credit
             </Link>
             <Link href="/dashboard/insurance" className={`flex items-center px-4 py-2 text-gray-700 hover:bg-gray-200 ${pathname === '/dashboard/insurance' ? 'bg-gray-200' : ''}`}>
-              <FaShieldAlt className="mr-3 w-6 h-6" />
+              <FaShieldAlt className="mr-3" />
               Insurance
             </Link>
             <Link href="/dashboard/Investment" className={`flex items-center px-4 py-2 text-gray-700 hover:bg-gray-200 ${pathname === '/dashboard/insurance' ? 'bg-gray-200' : ''}`}>
-              <FaShieldAlt className="mr-3 w-6 h-6" />
+              <FaShieldAlt className="mr-3" />
               Investment Options
             </Link>
             <Link href="/dashboard/community" className={`flex items-center px-4 py-2 text-gray-700 hover:bg-gray-200 ${pathname === '/dashboard/community' ? 'bg-gray-200' : ''}`}>
               {/* Use an appropriate icon for Community */}
-              <FaUsers className="mr-3 w-6 h-6" />
+              <FaUsers className="mr-3" />
               Community
             </Link>
           </nav>
@@ -182,7 +174,7 @@ const Dashboard = () => {
           {pathname === '/dashboard' && (
             <div className="mt-4">
               <h2 className="text-2xl font-semibold mb-6">Your Financial Overview</h2>
-
+              
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                 {/* Savings Chart */}
                 <div className="bg-white p-6 rounded-lg shadow-md">
@@ -193,7 +185,7 @@ const Dashboard = () => {
                 {/* Credit Status Chart */}
                 <div className="bg-white p-6 rounded-lg shadow-md">
                   <h3 className="text-xl font-bold mb-4">Credit Requests Status</h3>
-                  <Pie data={savingsChartData} />
+                  <Pie data={creditChartData} />
                 </div>
 
                 {/* Insurance Claims Chart */}

@@ -39,7 +39,7 @@ export default function Home() {
             Whether you`&apos;`re saving for a rainy day, a dream vacation, or your child`&apos;`s education, Lejaa makes it easy. Set your goals, save at your own pace, and watch your savings grow—all from your mobile phone. No bank account needed. Your future starts with just a few taps
           </p>
           <div className="mt-8 flex space-x-3 w-2/3 h-16">
-            <button href="/register" className="bg-gradient-to-r from-amber-300 to-amber-500 flex items-center justify-center rounded-full p-6 py-3 w-1/2 bg-amber-500 text-lg font-semibold"><p href="/register">Sign Up</p></button>
+            <button href="/register" className="text-white bg-gradient-to-r from-amber-300 to-amber-500 flex items-center justify-center rounded-full p-6 py-3 w-1/2 bg-amber-500 text-lg font-semibold"><p href="/register">Sign Up</p></button>
             <div className="flex items-center justify-center rounded-full p-6 w-1/2 bg-white text-lg text-black font-semibold">About Us</div>
           </div>
         </div>
@@ -65,7 +65,7 @@ export default function Home() {
             className="relative bg-cover w-1/3 h-72 rounded-lg bg-amber-500 flex items-center p-3">
             <div className="absolute inset-0 bg-gradient-to-b from-transparent via-amber-300/40 to-amber-500"></div>
             <div className="relative z-1 flex items-center justify-between w-full mt-auto">
-              <p className="w-2/4 font-medium">Sign up on Lejaa and create your account without any extra charge</p>
+              <p className="w-2/4 font-medium text-white">Sign up on Lejaa and create your account without any extra charge</p>
               <div className="w-12 h-12 text-amber-500 font-bold text-xl bg-white rounded-md flex items-center justify-center">
                 1
               </div>
@@ -78,7 +78,7 @@ export default function Home() {
             className="relative bg-cover w-1/3 h-72 rounded-lg bg-amber-500 flex items-center p-3">
             <div className="absolute inset-0 bg-gradient-to-b from-transparent via-amber-300/40 to-amber-500"></div>
             <div className="relative z-1 flex items-center justify-between w-full mt-auto">
-              <p className="w-3/4 font-medium">Create your savings and investment goals. You can create both personal and group goals</p>
+              <p className="w-3/4 font-medium text-white">Create your savings and investment goals. You can create both personal and group goals</p>
               <div className="w-12 h-12 text-amber-500 font-bold text-xl bg-white rounded-md flex items-center justify-center">
                 2
               </div>
@@ -89,7 +89,7 @@ export default function Home() {
             className="relative bg-cover w-1/3 h-72 rounded-lg bg-amber-500 flex items-center p-3">
             <div className="absolute inset-0 bg-gradient-to-b from-transparent via-amber-300/40 to-amber-500"></div>
             <div className="relative z-1 flex items-center justify-between w-full mt-auto">
-              <p className="w-3/4 font-medium">
+              <p className="text-white w-3/4 font-medium">
                 Start depositing cash in to the goals that you create. You can do this effortlessly through reminders and saving rules
               </p>
               <div className="w-12 h-12 text-amber-500 font-bold text-xl bg-white rounded-md flex items-center justify-center">

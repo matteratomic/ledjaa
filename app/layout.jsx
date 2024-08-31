@@ -30,13 +30,13 @@ export default function RootLayout({
           <div className="font-arcane text-6xl text-amber-500 rounded-md w-90 h-16 px-6">
           <img src="/logo.jpg" alt="Logo" className="h-12 mb-8" />
           </div>
-          <nav className="flex space-x-8 h-20">
+          <nav className="flex space-x-8 ">
             <Link className="text-black" href="/about">About</Link>
-            <Link className="text-black" href="/prices">Prices</Link>
+            <Link className="text-black" href="#pricing">Pricing</Link>
             <Link className="text-black" href="/program">Program</Link>
             <Link className="text-black" href="/dashboard">Dashboard</Link>
           </nav>
-          <div className="bg-amber-500 rounded-lg w-32 h-12 flex justify-center items-center">Contact Us</div>
+          <div className="text-white bg-amber-500 rounded-lg w-32 h-12 flex justify-center items-center">Contact Us</div>
         </div>
         {children}
         

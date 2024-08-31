@@ -2,6 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import Image from 'next/image';
 import { IoCloseOutline, IoSendSharp } from 'react-icons/io5';
+import { LucideMessageCircle } from 'lucide-react'
 
 const FactCard = ({ image, title, text }) => {
   return (
@@ -79,8 +80,8 @@ const AnimatedPrompt = () => {
     return () => clearInterval(timer);
   }, [isVisible]);
 
-  return isVisible ? (
-    <div className="absolute -top-10 left-0 bg-purple-800 text-white p-2 mb-10 rounded-lg animate-fade">
+  return !isVisible ? (
+    <div className="absolute -top-20 w-52 -left-32 bg-amber-500 text-white p-2 mb-10 rounded-lg animate-fade">
       Hello, I'm Lejaa. Ask me a question.
     </div>
   ) : null;
@@ -162,37 +163,37 @@ const ChatbotWidget = () => {
       <AnimatedPrompt />
       <div className={`widget-container ${isWidgetOpen ? 'widget-open' : ''} transition-all duration-500 ease-in-out`}>
         <div
-          className="widget-button text-white font-bold py-3 px-5 rounded-full cursor-pointer transition-all duration-300 ease-in-out"
+          className="widget-button bg-amber-500 text-white font-bold w-16 h-16 flex items-center justify-center py-3 px-5 rounded-full cursor-pointer transition-all duration-300 ease-in-out"
           onClick={openWidget}
         >
-          <Image src="/mascot.png" alt="Chatbot Icon" width={160} height={160} className="w-10 h-10 object-contain animate-glow" />
+          {/* <Image src="/mascot.png" alt="Chatbot Icon" width={160} height={160} className="w-10 h-10 object-contain animate-glow" /> */}
+          <LucideMessageCircle className=""/>
           <style>{animationStyles}</style>
         </div>
       </div>
 
       {isModalOpen && (
         <div
-          className={`modal fixed inset-0 flex items-end justify-end z-50 transition-all duration-500 ease-in-out mr-20 mb-20 ${
-            isModalOpen ? 'fade-in' : 'fade-out'
-          }`}
+          className={`modal fixed inset-0 flex items-end justify-end z-50 transition-all duration-500 ease-in-out mr-20 mb-20 ${isModalOpen ? 'fade-in' : 'fade-out'
+            }`}
         >
           <div className="modal-overlay absolute inset-0 opacity-75 transition-all duration-300 ease-in-out"></div>
 
-          <div className="relative modal-content overflow-hidden bg-white rounded-2xl shadow-lg z-10 w-full max-w-xl transition-all duration-500 ease-in-out">
-            <div className="rounded-2xl relative h-80 bg-gradient-to-r from-blue-500 to-purple-500 text-white rounded-t-lg p-8 flex justify-between items-center">
+          <div className="relative modal-content overflow-hidden bg-white rounded-2xl shadow-lg z-10 w-full max-w-sm transition-all duration-500 ease-in-out">
+            <div className="rounded-2xl relative h-80 bg-gradient-to-r from-amber-400 to-amber-500 text-white rounded-t-lg p-8 flex justify-between items-center">
               <div
                 style={{ backgroundImage: 'url(/african-print.jpg)' }}
                 className="absolute inset-0 flex items-center space-x-8 flex-1 shadow-md rounded-2xl"
               ></div>
 
-              <div className="z-10 opacity-85 bg-gradient-to-br from-[#DD16FF] to-blue-500 absolute inset-0 flex items-center space-x-8 flex-1">
+              <div className="z-10 opacity-85 bg-gradient-to-br from-amber-400 to-amber-600 absolute inset-0 flex items-center space-x-8 flex-1">
                 {' '}
               </div>
 
               <div className="relative z-10 flex flex-col">
                 <div className="absolute animate-ping w-6 h-6 bg-white rounded-full top-0 right-0"></div>
-                <span className="text-white/85 text-5xl font-bold mb-2">Hello there</span>
-                <span className="modal-title text-5xl font-bold">How can I help?</span>
+                <span className="text-white/85 text-4xl font-bold mb-2">Hello there</span>
+                <span className="modal-title text-4xl font-bold">How can I help?</span>
               </div>
 
               <div
@@ -216,8 +217,8 @@ const ChatbotWidget = () => {
                   ))
                 ) : (
                   <div className="flex flex-col">
-                    <span className="text-gray-800 text-2xl font-bold">Send me a message</span>
-                    <span className="mt-1 text-gray-500 modal-title text-xl">I'm always here to help you</span>
+                    <span className="text-gray-800 text-xl font-bold">Send me a message</span>
+                    <span className="mt-1 text-gray-500 modal-title text-lg">I'm always here to help you</span>
                   </div>
                 )}
               </div>
@@ -233,7 +234,7 @@ const ChatbotWidget = () => {
                 />
                 <button
                   onClick={handleSend}
-                  className="ml-2 px-4 py-2 bg-purple-500 text-white rounded-md hover:bg-purple-600 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-opacity-50"
+                  className="ml-2 px-4 py-2 bg-amber-500 text-white rounded-md hover:bg-purple-600 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-opacity-50"
                 >
                   <IoSendSharp className="text-2xl" />
                 </button>
