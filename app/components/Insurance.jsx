@@ -1,33 +1,103 @@
 // components/Insurance.js
-import React from 'react';
-import { FaShieldAlt } from 'react-icons/fa';
-import { FiPlus } from 'react-icons/fi';
+import React, { useState, useEffect } from 'react';
+import { db, auth, storage } from '../lib/firebase';
+import { collection, addDoc, query, where, getDocs } from 'firebase/firestore';
+import { onAuthStateChanged } from 'firebase/auth';
+import { ref, uploadBytes, getDownloadURL } from 'firebase/storage';
+import { Input, Textarea } from "../../components/ui/input";
+import { Button } from "../../components/ui/button";
 
 const Insurance = () => {
+  const [insuranceClaims, setInsuranceClaims] = useState([]);
+  const [user, setUser] = useState(null);
+  const [amount, setAmount] = useState("");
+  const [description, setDescription] = useState("");
+  const [file, setFile] = useState(null);
+
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
+      if (currentUser) {
+        setUser(currentUser);
+        fetchInsuranceClaims(currentUser.uid);
+      }
+    });
+
+    return () => unsubscribe();
+  }, []);
+
+  const fetchInsuranceClaims = async (userId) => {
+    const q = query(collection(db, 'insuranceClaims'), where('userId', '==', userId));
+    const querySnapshot = await getDocs(q);
+    const claimsData = querySnapshot.docs.map(doc => ({ ...doc.data(), id: doc.id }));
+    setInsuranceClaims(claimsData);
+  };
+
+  const handleFileClaim = async (e) => {
+    e.preventDefault();
+    if (user) {
+      let fileURL = "";
+      if (file) {
+        const storageRef = ref(storage, `insuranceClaims/${user.uid}/${Date.now()}_${file.name}`);
+        const snapshot = await uploadBytes(storageRef, file);
+        fileURL = await getDownloadURL(snapshot.ref);
+      }
+
+      const newClaim = {
+        amount: parseFloat(amount),
+        date: new Date().toISOString().split('T')[0],
+        status: 'pending',
+        userId: user.uid,
+        description,
+        fileURL, // URL of the uploaded file
+      };
+      await addDoc(collection(db, 'insuranceClaims'), newClaim);
+      setInsuranceClaims([...insuranceClaims, newClaim]);
+      setAmount("");
+      setDescription("");
+      setFile(null);
+    }
+  };
+
   return (
-    <div className="max-w-4xl mx-auto bg-white shadow-lg rounded-lg p-6">
-      <div className="flex items-center justify-between mb-6">
-        <h2 className="text-2xl font-bold flex items-center text-blue-500">
-          <FaShieldAlt className="mr-2" />
-          Insurance
-        </h2>
-        <button className="flex items-center px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600">
-          <FiPlus className="mr-2" />
-          Add Insurance
-        </button>
-      </div>
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-        {/* Insurance Cards */}
-        <div className="bg-gray-100 p-4 rounded-lg shadow-inner">
-          <h3 className="text-xl font-semibold mb-2">Health Insurance</h3>
-          <p className="text-gray-700">$1,200/year</p>
-        </div>
-        <div className="bg-gray-100 p-4 rounded-lg shadow-inner">
-          <h3 className="text-xl font-semibold mb-2">Crop Insurance</h3>
-          <p className="text-gray-700">$800/year</p>
-        </div>
-        {/* Add more insurance categories as needed */}
-      </div>
+    <div className="bg-white p-6 rounded-lg shadow-md">
+      <h2 className="text-2xl font-bold mb-4">Insurance</h2>
+      
+      <form onSubmit={handleFileClaim} className="space-y-4 mb-6">
+        <Input
+          type="number"
+          placeholder="Enter claim amount ($)"
+          value={amount}
+          onChange={(e) => setAmount(e.target.value)}
+          className="w-full"
+          required
+        />
+        <Textarea
+          placeholder="Description of the claim"
+          value={description}
+          onChange={(e) => setDescription(e.target.value)}
+          className="w-full"
+          required
+        />
+        <input
+          type="file"
+          accept="image/*,application/pdf"
+          onChange={(e) => setFile(e.target.files[0])}
+          className="w-full"
+          required
+        />
+        <Button type="submit" className="w-full bg-red-500 hover:bg-red-600">
+          File Insurance Claim
+        </Button>
+      </form>
+
+      <h3 className="text-xl font-semibold mb-4">Your Insurance Claims</h3>
+      <ul>
+        {insuranceClaims.map(claim => (
+          <li key={claim.id} className="mb-2">
+            - ${claim.amount} on {claim.date} ({claim.status}) - {claim.description} {claim.fileURL && <a href={claim.fileURL} target="_blank" rel="noopener noreferrer" className="text-blue-500 underline">View Document</a>}
+          </li>
+        ))}
+      </ul>
     </div>
   );
 };
