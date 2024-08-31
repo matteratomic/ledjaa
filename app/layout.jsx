@@ -6,6 +6,7 @@ import localFont from 'next/font/local'
 import Footer from "./components/Footer";
 import {AuthProvider} from './context/AuthContext'
 const inter = Inter({ subsets: ["latin"] });
+import ChatbotWidget from '../app/components/Chatbox'
 
 export const metadata = {
   title: "Create Next App",
@@ -40,6 +41,7 @@ export default function RootLayout({
         {children}
         
       </body>
+      <ChatbotWidget />
     </html>
   );
 }
