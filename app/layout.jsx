@@ -26,7 +26,9 @@ export default function RootLayout({
     <html lang="en">
       <body style={{ background: '#F3F4F6' }} className={`${inter.className} ${arcane.variable}`}>
         <div className="fixed top-0 left-0 right-0  z-10 flex w-full items-center justify-between bg-white px-8 py-2">
-          <div className="font-arcane text-6xl text-amber-500 rounded-md w-16 h-16 px-6">Lejaa</div>
+          <div className="font-arcane text-6xl text-amber-500 rounded-md w-90 h-16 px-6">
+          <img src="/logo.jpg" alt="Logo" className="h-24 mb-8" />
+          </div>
           <nav className="flex space-x-8">
             <Link className="text-black" href="/about">About</Link>
             <Link className="text-black" href="/prices">Prices</Link>

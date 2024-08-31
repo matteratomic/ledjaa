@@ -1,12 +1,11 @@
 "use client"
 import React, { useState, useEffect } from 'react';
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
-import { Card, CardHeader, CardContent } from '../../@/components/ui/card';
-import { Button } from '../../@/components/ui/button';
+import { Button } from '../../components/ui/button';
 // import { Input } from '@/components/ui/input';
+import {Card, CardHeader, CardContent} from "../../components/ui/card"
 
-import {Input} from '../../@/components/ui/input'
-
+import {Input} from '../../components/ui/input'
 
 const Dashboard = () => {
   const [communities, setCommunities] = useState([]);
