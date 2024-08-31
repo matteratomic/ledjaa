@@ -151,6 +151,10 @@ const Dashboard = () => {
               <FaShieldAlt className="mr-3" />
               Insurance
             </Link>
+            <Link href="/dashboard/Investment" className={`flex items-center px-4 py-2 text-gray-700 hover:bg-gray-200 ${pathname === '/dashboard/insurance' ? 'bg-gray-200' : ''}`}>
+              <FaShieldAlt className="mr-3" />
+              Investment Options
+            </Link>
             <Link href="/dashboard/community" className={`flex items-center px-4 py-2 text-gray-700 hover:bg-gray-200 ${pathname === '/dashboard/community' ? 'bg-gray-200' : ''}`}>
               {/* Use an appropriate icon for Community */}
               <FaUsers className="mr-3" />
